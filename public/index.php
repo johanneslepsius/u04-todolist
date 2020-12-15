@@ -25,27 +25,23 @@ include_once "db/connect.php";
     <section>
     <ul>
     <?php 
-    $query = "SELECT * FROM tasks;";
-    $result = $conn->query($query)->fetchAll();
-    foreach ($result as $task) {
-        $listitem = '<li><form method=\"POST\" action="' . htmlspecialchars($_SERVER['PHP_SELF'])
-        . '">' . "<input name=\"title\" type=\"text\" value=\"$task[title]\"> 
-        <input name=\"tasktext\" type=\"text\" value=\"$task[tasktext]\">
-        <input type=\"hidden\" name=\"taskid\" value=\"$task[id]\">
-        <input type=\"submit\" name=\"update\" value=\"Update\">
-        <input type=\"submit\" name=\"delete\" value=\"Delete\">
-        </form>
-        </li>";
-        echo $listitem;
-    }
     if (isset($_POST['update'])) {
         include_once "functions/handleupdates.php";
     }
-    
+     if (isset($_POST['delete'])) {
+    include_once "functions/handledelete.php";
+    }
+    if (isset($_POST['completed'])) {
+        include_once "functions/complete.php";
+    }
+
+    include_once "functions/printtask.php";
+    echo printtask(false);
+
     ?>
     </ul>
     <?php 
-    include_once "functions/handledelete.php";
+   
     ?>
     </section>
 </body>

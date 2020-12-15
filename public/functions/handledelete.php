@@ -4,6 +4,8 @@ $query = "DELETE FROM tasks WHERE id = :taskid";
 
 $stmnt = $conn->prepare($query);
 
+try {
 $stmnt->execute(["taskid"=>$taskid]);
-
-var_dump($_POST['taskid']);
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
