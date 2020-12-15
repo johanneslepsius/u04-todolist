@@ -2,11 +2,11 @@
 
 ## SQL
 skapa databas
-skapa tabell för uppgifter med
+skapa tabell för tasks med
 id auto incr
-titel
-uppgiftstext
-done (bit?)    -> kan ta emot true/false   default 0
+title 
+tasktext 
+completed (bit?)    -> kan ta emot true/false   default 0
 
 skapa usertabell
 user id auto incr primary
