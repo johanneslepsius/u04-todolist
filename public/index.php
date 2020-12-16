@@ -23,26 +23,44 @@ include_once "db/connect.php";
     }
     ?>
     <section>
+    <h3>Tasks:</h3>
     <ul>
     <?php 
     if (isset($_POST['update'])) {
         include_once "functions/handleupdates.php";
     }
+
      if (isset($_POST['delete'])) {
-    include_once "functions/handledelete.php";
+        include_once "functions/handledelete.php";
     }
+
     if (isset($_POST['completed'])) {
         include_once "functions/complete.php";
+        complete($conn);
     }
 
     include_once "functions/printtask.php";
-    echo printtask(false);
+    echo printtask($conn, false);
 
     ?>
     </ul>
+    
+    </section>
+    <section>
+    <h3>Completed Tasks:</h3>
+    <ul>
     <?php 
-   
+    
+    include_once "functions/printcomptask.php";
+    
+    if (isset($_POST['undo'])) {
+        include_once "functions/complete.php";
+        complete($conn);
+        header("Refresh:0");
+    }
+    echo printcomptask($conn, true);
     ?>
+    </ul>
     </section>
 </body>
 </html>
