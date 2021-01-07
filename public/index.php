@@ -1,15 +1,15 @@
 <?php 
-include_once "db/connect.php";
+include_once "db/connect.inc.php";
+include_once "includes/handledelete.inc.php";
+include_once "header.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do-List</title>
-</head>
-<body>
+
     <h1>pawesome todolist</h1>
+    <?php
+    if (isset($_SESSION["useruid"])) {
+    echo "<p>Welcome to the cat-related-todos-only-list, " . $_SESSION["useruid"] . "!</p>";
+    }
+?>
     <form method="POST" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>">
         <label for="title">Task Title:</label>
         <input name="title" type="text">
@@ -19,7 +19,7 @@ include_once "db/connect.php";
     </form>
     <?php
     if (isset($_POST['createtask'])){
-        include_once "functions/handleinput.php";
+        include_once "includes/handleinput.inc.php";
     }
     ?>
     <section>
@@ -27,19 +27,19 @@ include_once "db/connect.php";
     <ul>
     <?php 
     if (isset($_POST['update'])) {
-        include_once "functions/handleupdates.php";
+        include_once "includes/handleupdates.inc.php";
     }
 
      if (isset($_POST['delete'])) {
-        include_once "functions/handledelete.php";
+        delete($conn);
     }
 
     if (isset($_POST['completed'])) {
-        include_once "functions/complete.php";
+        include_once "includes/complete.inc.php";
         complete($conn);
     }
 
-    include_once "functions/printtask.php";
+    include_once "includes/printtask.inc.php";
     echo printtask($conn, false);
 
     ?>
@@ -48,19 +48,28 @@ include_once "db/connect.php";
     </section>
     <section>
     <h3>Completed Tasks:</h3>
+    <?php 
+    if (isset($_POST['deleteAllComp'])) {
+        deleteAllComp($conn);
+    } 
+    ?>
+    <form method="POST" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+    <input type="submit" name="deleteAllComp" value="Delete all completed Tasks">
+    </form>
     <ul>
     <?php 
-    
-    include_once "functions/printcomptask.php";
-    
     if (isset($_POST['undo'])) {
-        include_once "functions/complete.php";
+        include_once "includes/complete.inc.php";
         complete($conn);
         header("Refresh:0");
     }
+    
+    include_once "includes/printcomptask.inc.php";
+    
     echo printcomptask($conn, true);
     ?>
     </ul>
     </section>
-</body>
-</html>
+<?php
+include_once "footer.php";
+?>
