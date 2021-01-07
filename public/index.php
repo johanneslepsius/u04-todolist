@@ -6,11 +6,15 @@ include_once "header.php";
 
     <h1>pawesome todolist</h1>
     <?php
+    if (!isset($_SESSION["useruid"])) {
+    echo "<p>Welcome to the cat-related-todos-only-list, unknown being! Please sign up or log in, 
+    it works but does absolutely nothing with this list except changing the menu and welcome message!</p>";
+    }
     if (isset($_SESSION["useruid"])) {
     echo "<p>Welcome to the cat-related-todos-only-list, " . $_SESSION["useruid"] . "!</p>";
     }
 ?>
-    <form method="POST" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+    <form method="POST" action="\includes\catvalidation.inc.php">
         <label for="title">Task Title:</label>
         <input name="title" type="text">
         <label for="tasktext">Enter your Task:</label>
@@ -18,8 +22,9 @@ include_once "header.php";
         <input type="submit" name="createtask" value="Create Task">
     </form>
     <?php
-    if (isset($_POST['createtask'])){
-        include_once "includes/handleinput.inc.php";
+    if (isset($_GET['cat'])){
+        echo "<div class='sadcat'><img src='\img\sadcat.jpg' alt='very sad cat'/>
+        <p>It seems you have created a task not involving a cat.</p><a href='index.php'>Make the cat happy</a></div>";
     }
     ?>
     <section>
