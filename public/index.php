@@ -1,6 +1,6 @@
 <?php 
 include_once "db/connect.inc.php";
-include_once "includes/handledelete.inc.php";
+include_once "includes/functions.inc.php";
 include_once "header.php";
 ?>
 
@@ -32,7 +32,7 @@ include_once "header.php";
     <ul>
     <?php 
     if (isset($_POST['update'])) {
-        include_once "includes/handleupdates.inc.php";
+        update($conn);
     }
 
      if (isset($_POST['delete'])) {
@@ -40,11 +40,10 @@ include_once "header.php";
     }
 
     if (isset($_POST['completed'])) {
-        include_once "includes/complete.inc.php";
+        // include_once "includes/complete.inc.php";
         complete($conn);
     }
-
-    include_once "includes/printtask.inc.php";
+    
     echo printtask($conn, false);
 
     ?>
@@ -68,8 +67,6 @@ include_once "header.php";
         complete($conn);
         header("Refresh:0");
     }
-    
-    include_once "includes/printcomptask.inc.php";
     
     echo printcomptask($conn, true);
     ?>
