@@ -1,28 +1,7 @@
 # u04-todo-app-johanneslepsius
 
 ## SQL to make the project work
-CREATE DATABASE todolist;
-
-USE todolist;
-
-CREATE TABLE tasks (
-id int(255),
-title varchar(30),
-tasktext varchar(255),
-completed bit DEFAULT null,
-PRIMARY KEY (id)
-);
-
-CREATE TABLE users (
-usersId int(11),
-usersName varchar(128),
-usersEmail varchar(128),
-usersUid varchar(128),
-usersPwd varchar(128),
-PRIMARY KEY (usersId)
-);
-
-
+i exported the database instructions to the todolist.sql file
 
 ## planning the project
 
