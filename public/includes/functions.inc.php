@@ -53,11 +53,11 @@ if ($stmt->execute(["title"=>$title, "tasktext"=>$tasktext, "id"=>$id])) {
 }
 }
 
-function printcomptask(PDO $conn, $completed){
+function printcomptask(PDO $conn, $completed, $userid){
 
-    $query = "SELECT * FROM tasks WHERE completed = ?";
+    $query = "SELECT * FROM tasks WHERE userid = :userid AND completed = :completed";
     $stmt = $conn->prepare($query);
-    $stmt->execute([$completed]);
+    $stmt->execute(["userid"=>$userid, "completed"=>$completed]);
     $result = $stmt->fetchAll();
 
 
@@ -73,11 +73,11 @@ function printcomptask(PDO $conn, $completed){
     }
 }
 
-function printtask(PDO $conn, $completed){
+function printtask(PDO $conn, $completed, $userid){
 
-    $query = "SELECT * FROM tasks WHERE completed = ?";
+    $query = "SELECT * FROM tasks WHERE userid = :userid AND completed = :completed";
     $stmt = $conn->prepare($query);
-    $stmt->execute([$completed]);
+    $stmt->execute(["userid"=>$userid, "completed"=>$completed]);
     $result = $stmt->fetchAll();
 
 
