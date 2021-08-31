@@ -13,11 +13,11 @@ include_once "header.php";
     }
 
     if (isset($_SESSION["useruid"])) { 
-    
+
         echo "<p>Welcome to the cat-related-todos-only-list, " . $_SESSION["useruid"] . "!</p>";
     
         ?>
-        <form method="POST" action="\includes\catvalidation.inc.php">
+        <form method="POST" name="newtask" action="\includes\catvalidation.inc.php">
             <label for="title">Task Title:</label>
             <input name="title" type="text">
             <label for="tasktext">Enter your Task:</label>

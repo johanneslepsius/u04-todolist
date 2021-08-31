@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST);
 $tasktext = $_POST["tasktext"];
 $catcheck1 = stripos($tasktext, "cat");
 echo $tasktext;
